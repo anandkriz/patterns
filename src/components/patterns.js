@@ -23,10 +23,16 @@ function Patterns() {
     { "pattern": "Hour glass star pattern", "name": "Hourglassstarpattern" },
     { "pattern": "Right Pascal Star Pattern", "name": "RightPascalStar" },
     { "pattern": "Left Pascal star pattern", "name": "LeftPascalstar" },
-    { "pattern": "Hollow Diamond Pattern", "name": "HollowDiamond" },]
+    { "pattern": "Hollow Diamond Pattern", "name": "HollowDiamond" },
+    { "pattern": "Number pattern", "name": "numpattern" },
+    { "pattern": "Left Number pattern", "name": "leftNumber" },
+
+
+    ]
 
     const [pattern, setPattern] = useState([])
     const [selectValues, setSelectValues] = useState();
+    const [rows, setRows] = useState(0)
 
     const SquareStarPattern = () => {
         let n = 5;
@@ -61,7 +67,7 @@ function Patterns() {
         let n = 5;
         for (let i = 0; i < n; i++) {
             let pattern = '';
-            for (let j = 0; j <= 0 n - i; j++) {
+            for (let j = 0; j < n - i; j++) {
                 pattern += ' ';
             }
             for (let k = 1; k <= i; k++) {
@@ -334,6 +340,68 @@ function Patterns() {
 
         setPattern(rows)
     }
+
+    const NumberPattern = () => {
+        var n = 6
+        let patterns = []
+
+        // for (let i = 1; i <= n; i++) {
+        //     let pattern = ""
+        //     for (let j = 1; j <=n-i; j++) {
+        //         pattern += n-i
+        //     }
+        //     patterns.push(pattern)
+        // }
+
+        for (let i = 1; i <= n; i++) {
+            let pattern = ""
+            for (let j = 1; j <= n - i + 1; j++) {
+                pattern += n - j + 1;
+            }
+            patterns.push(pattern)
+        }
+        setPattern(patterns)
+
+        for (let i = 2; i <= n; i++) {
+            let pattern = ""
+            for (let j = 1; j <= i; j++) {
+                pattern += n - j + 1
+            }
+            patterns.push(pattern)
+        }
+
+    }
+
+    // const leftNumberPiramid = () => {
+    //     let n = 5
+    //     for (let i = 0; i < n; i++) {
+    //         for (let j = 0; j < i; j++) {
+    //             console.log(j)
+    //         }
+    //     }
+    // }
+
+    const leftNumberPiramid = () => {
+        let n = 5;
+        let string = "";
+        let patterns = []
+
+        for (let i = 1; i <= n; i++) {
+            let patten = ""
+            for (let j = 1; j <= i; j++) {
+                patten += j
+                string += j;
+            }
+            patterns.push(patten)
+            string += "\n";
+        }
+        setPattern(patterns)
+
+        console.log(string);
+    }
+
+
+
     const onClick = () => {
         switch (selectValues) {
             case "squareStar":
@@ -378,41 +446,63 @@ function Patterns() {
             case "HollowDiamond":
                 HollowDiamondPattern();
                 break;
+            case "numpattern":
+                NumberPattern();
+                break;
+            case "leftNumber":
+                leftNumberPiramid();
+                break;
             default:
                 break;
         }
     }
+
     return (
         <div>
-            <select style={selectStyle} onChange={(e) => setSelectValues(e.target.value)}>
+            <select className='selectStyle' onChange={(e) => setSelectValues(e.target.value)}>
                 <option>select a pattern</option>
                 {pattens.map(({ pattern, name }) =>
                     <option value={name}>{pattern}</option>
                 )}
 
             </select>
-            <button style={buttonStyles} onClick={onClick}>pattern</button>
+            <button className='buttonStyles' onClick={onClick}>pattern</button>
             {pattern.map((item) =>
                 <pre><h1>{item}</h1></pre>
             )}
+
+
+            <>
+                <div className="inside-header inside-header--space-below" />
+                <main>
+                    <div className="container ">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="content-area">
+                                    <div className="section-wrapper">
+
+                                        <div className="error-page">
+                                            <figure>
+                                                <img alt="404" />
+                                            </figure>
+                                            <aside>
+                                                <p >test</p>
+                                                <h2>page_not_found</h2>
+                                                <p>page_not_found_description_1 <br /> page_not_found_description_2</p>
+                                            </aside>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </>
 
         </div>
     )
 }
 
 
-const selectStyle = {
-    width: "200px",
-    padding: "10px",
-    fontSize: "16px",
-    border: "solid 1px #ddd",
-    borderRadius: "4px",
-}
-const buttonStyles = {
-    backgroundColor: 'green',
-    color: 'white',
-    padding: '10px 20px',
-    borderRadius: '5px'
-};
 
 export default Patterns
